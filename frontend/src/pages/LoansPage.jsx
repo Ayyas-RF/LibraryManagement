@@ -67,11 +67,10 @@ export default function LoansPage() {
 
   const formatDate = (dateString) => {
     if (!dateString) return "-";
-    // Adding T12:00:00 avoids timezone shift issues for date-only strings
     const date = new Date(
       dateString.includes("T") ? dateString : `${dateString}T12:00:00`,
     );
-    return date.toLocaleDateString("en-GB").replace(/\//g, "-"); // DD-MM-YYYY format
+    return date.toLocaleDateString("en-GB").replace(/\//g, "-");
   };
 
   return (

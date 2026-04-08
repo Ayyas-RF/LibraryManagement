@@ -31,9 +31,17 @@ export default function DashboardPage() {
           className="stat-card"
           style={{ "--accent-color": "var(--primary)" }}
         >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-start",
+            }}
+          >
             <h3>Total Books</h3>
-            <md-icon style={{ color: 'var(--primary)', fontSize: '1.5rem' }}>library_books</md-icon>
+            <md-icon style={{ color: "var(--primary)", fontSize: "1.5rem" }}>
+              library_books
+            </md-icon>
           </div>
           <div className="value">{stats.totalBuku}</div>
         </div>
@@ -41,9 +49,17 @@ export default function DashboardPage() {
           className="stat-card"
           style={{ "--accent-color": "var(--secondary)" }}
         >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-start",
+            }}
+          >
             <h3>Total User</h3>
-            <md-icon style={{ color: 'var(--secondary)', fontSize: '1.5rem' }}>group</md-icon>
+            <md-icon style={{ color: "var(--secondary)", fontSize: "1.5rem" }}>
+              group
+            </md-icon>
           </div>
           <div className="value">{stats.totalUser}</div>
         </div>
@@ -51,9 +67,17 @@ export default function DashboardPage() {
           className="stat-card"
           style={{ "--accent-color": "var(--tertiary)" }}
         >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-start",
+            }}
+          >
             <h3>Borrowed Books</h3>
-            <md-icon style={{ color: 'var(--tertiary)', fontSize: '1.5rem' }}>bookmark_added</md-icon>
+            <md-icon style={{ color: "var(--tertiary)", fontSize: "1.5rem" }}>
+              bookmark_added
+            </md-icon>
           </div>
           <div className="value">{stats.peminjamanAktif}</div>
         </div>
@@ -61,4 +85,3 @@ export default function DashboardPage() {
     </div>
   );
 }
-

@@ -13,9 +13,18 @@ export default function UsersPage() {
   const dialogRef = useRef(null);
 
   const colors = [
-    "#FF5722", "#E91E63", "#9C27B0", "#673AB7", 
-    "#3F51B5", "#2196F3", "#00BCD4", "#009688", 
-    "#4CAF50", "#FFC107", "#FF9800", "#795548"
+    "#FF5722",
+    "#E91E63",
+    "#9C27B0",
+    "#673AB7",
+    "#3F51B5",
+    "#2196F3",
+    "#00BCD4",
+    "#009688",
+    "#4CAF50",
+    "#FFC107",
+    "#FF9800",
+    "#795548",
   ];
 
   const getAvatarColor = (name) => {
@@ -45,10 +54,12 @@ export default function UsersPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Validation based on LoginPage logic
-    const isEmailInvalid = !form.email.includes("@") || !form.email.split("@")[1]?.includes(".");
-    const isPasswordInvalid = form.password.length < 8 || form.password.length > 16;
+    const isEmailInvalid =
+      !form.email.includes("@") || !form.email.split("@")[1]?.includes(".");
+    const isPasswordInvalid =
+      form.password.length < 8 || form.password.length > 16;
 
     if (isEmailInvalid) {
       showSnackbar("Email must include a valid domain (e.g., .com)");
@@ -69,7 +80,10 @@ export default function UsersPage() {
       }
     } catch (error) {
       console.error("Failed to add user", error);
-      showSnackbar("Error adding user: " + (error.response?.data?.message || "Unknown error"));
+      showSnackbar(
+        "Error adding user: " +
+          (error.response?.data?.message || "Unknown error"),
+      );
     }
   };
 
@@ -97,16 +111,20 @@ export default function UsersPage() {
 
   return (
     <div className="page-container">
-      <h2 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+      <h2
+        className="page-title"
+        style={{ display: "flex", alignItems: "center", gap: "12px" }}
+      >
         User Management
       </h2>
 
       <div
         className="section-card shadow-2"
-        style={{ 
+        style={{
           "--accent-color": "var(--secondary)",
-          background: "linear-gradient(to bottom right, var(--surface-container), var(--background))",
-          borderTop: "4px solid var(--secondary)"
+          background:
+            "linear-gradient(to bottom right, var(--surface-container), var(--background))",
+          borderTop: "4px solid var(--secondary)",
         }}
       >
         <h3
@@ -124,8 +142,25 @@ export default function UsersPage() {
           Register New User
         </h3>
         <form onSubmit={handleSubmit} className="form-group">
-          <div style={{ flex: 1, minWidth: "200px", display: 'flex', flexDirection: 'column', gap: '4px' }}>
-            <label style={{ fontSize: '0.75rem', fontWeight: '600', color: 'var(--outline)', marginLeft: '4px' }}>Full Name</label>
+          <div
+            style={{
+              flex: 1,
+              minWidth: "200px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "4px",
+            }}
+          >
+            <label
+              style={{
+                fontSize: "0.75rem",
+                fontWeight: "600",
+                color: "var(--outline)",
+                marginLeft: "4px",
+              }}
+            >
+              Full Name
+            </label>
             <input
               className="input-field"
               placeholder="e.g. John Doe"
@@ -134,8 +169,25 @@ export default function UsersPage() {
               required
             />
           </div>
-          <div style={{ flex: 1, minWidth: "200px", display: 'flex', flexDirection: 'column', gap: '4px' }}>
-            <label style={{ fontSize: '0.75rem', fontWeight: '600', color: 'var(--outline)', marginLeft: '4px' }}>Email Address</label>
+          <div
+            style={{
+              flex: 1,
+              minWidth: "200px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "4px",
+            }}
+          >
+            <label
+              style={{
+                fontSize: "0.75rem",
+                fontWeight: "600",
+                color: "var(--outline)",
+                marginLeft: "4px",
+              }}
+            >
+              Email Address
+            </label>
             <input
               className="input-field"
               type="email"
@@ -145,8 +197,25 @@ export default function UsersPage() {
               required
             />
           </div>
-          <div style={{ flex: 1, minWidth: "200px", display: 'flex', flexDirection: 'column', gap: '4px' }}>
-            <label style={{ fontSize: '0.75rem', fontWeight: '600', color: 'var(--outline)', marginLeft: '4px' }}>Secure Password (8-16 chars)</label>
+          <div
+            style={{
+              flex: 1,
+              minWidth: "200px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "4px",
+            }}
+          >
+            <label
+              style={{
+                fontSize: "0.75rem",
+                fontWeight: "600",
+                color: "var(--outline)",
+                marginLeft: "4px",
+              }}
+            >
+              Secure Password (8-16 chars)
+            </label>
             <input
               className="input-field"
               type="password"
@@ -158,54 +227,109 @@ export default function UsersPage() {
               required
             />
           </div>
-          <button type="submit" className="btn btn-primary" style={{ backgroundColor: "var(--secondary)", alignSelf: 'flex-end', height: '48px', marginBottom: '4px' }}>
+          <button
+            type="submit"
+            className="btn btn-primary"
+            style={{
+              backgroundColor: "var(--secondary)",
+              alignSelf: "flex-end",
+              height: "48px",
+              marginBottom: "4px",
+            }}
+          >
             <md-icon style={{ fontSize: "1.2rem" }}>how_to_reg</md-icon>
             <span>Register User</span>
           </button>
         </form>
       </div>
 
-      <div className="table-container shadow-3" style={{ border: 'none' }}>
+      <div className="table-container shadow-3" style={{ border: "none" }}>
         <table className="m3-table">
           <thead>
-            <tr style={{ background: 'var(--secondary-container)', color: 'var(--on-secondary-container)' }}>
-              <th style={{ width: "80px", borderTopLeftRadius: 'var(--radius-l)' }}>ID</th>
+            <tr
+              style={{
+                background: "var(--secondary-container)",
+                color: "var(--on-secondary-container)",
+              }}
+            >
+              <th
+                style={{
+                  width: "80px",
+                  borderTopLeftRadius: "var(--radius-l)",
+                }}
+              >
+                ID
+              </th>
               <th>Member Profile</th>
               <th>Email</th>
-              <th style={{ width: "120px", textAlign: "right", borderTopRightRadius: 'var(--radius-l)' }}>Action</th>
+              <th
+                style={{
+                  width: "120px",
+                  textAlign: "right",
+                  borderTopRightRadius: "var(--radius-l)",
+                }}
+              >
+                Action
+              </th>
             </tr>
           </thead>
           <tbody>
             {users.length > 0 ? (
               users.map((u) => (
                 <tr key={u.id}>
-                  <td style={{ color: 'var(--outline)', fontWeight: '500' }}>#{u.id}</td>
+                  <td style={{ color: "var(--outline)", fontWeight: "500" }}>
+                    #{u.id}
+                  </td>
                   <td>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                      <div style={{ 
-                        width: '40px', 
-                        height: '40px', 
-                        borderRadius: '50%', 
-                        background: getAvatarColor(u.nama),
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: 'white',
-                        fontWeight: '700',
-                        fontSize: '1rem',
-                        boxShadow: 'var(--shadow-1)'
-                      }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "12px",
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: "40px",
+                          height: "40px",
+                          borderRadius: "50%",
+                          background: getAvatarColor(u.nama),
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "white",
+                          fontWeight: "700",
+                          fontSize: "1rem",
+                          boxShadow: "var(--shadow-1)",
+                        }}
+                      >
                         {u.nama.charAt(0).toUpperCase()}
                       </div>
-                      <div style={{ display: 'flex', flexDirection: 'column' }}>
-                        <span style={{ fontWeight: "600", fontSize: '1rem' }}>{u.nama}</span>
-                        <span style={{ fontSize: '0.75rem', color: 'var(--outline)' }}>Registered Member</span>
+                      <div style={{ display: "flex", flexDirection: "column" }}>
+                        <span style={{ fontWeight: "600", fontSize: "1rem" }}>
+                          {u.nama}
+                        </span>
+                        <span
+                          style={{
+                            fontSize: "0.75rem",
+                            color: "var(--outline)",
+                          }}
+                        >
+                          Registered Member
+                        </span>
                       </div>
                     </div>
                   </td>
                   <td>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--primary)' }}>
-                      <md-icon style={{ fontSize: '1rem' }}>mail</md-icon>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "6px",
+                        color: "var(--primary)",
+                      }}
+                    >
+                      <md-icon style={{ fontSize: "1rem" }}>mail</md-icon>
                       {u.email}
                     </div>
                   </td>
@@ -213,10 +337,16 @@ export default function UsersPage() {
                     <button
                       onClick={() => handleDelete(u.id)}
                       className="btn btn-error"
-                      style={{ padding: '8px', minWidth: '40px', borderRadius: '12px' }}
+                      style={{
+                        padding: "8px",
+                        minWidth: "40px",
+                        borderRadius: "12px",
+                      }}
                       title="Delete User"
                     >
-                      <md-icon style={{ fontSize: '1.2rem' }}>delete_forever</md-icon>
+                      <md-icon style={{ fontSize: "1.2rem" }}>
+                        delete_forever
+                      </md-icon>
                     </button>
                   </td>
                 </tr>
@@ -231,7 +361,15 @@ export default function UsersPage() {
                     color: "var(--outline)",
                   }}
                 >
-                  <md-icon style={{ fontSize: '3rem', marginBottom: '1rem', opacity: 0.5 }}>group_off</md-icon>
+                  <md-icon
+                    style={{
+                      fontSize: "3rem",
+                      marginBottom: "1rem",
+                      opacity: 0.5,
+                    }}
+                  >
+                    group_off
+                  </md-icon>
                   <div>No members joined the library yet</div>
                 </td>
               </tr>
@@ -246,8 +384,8 @@ export default function UsersPage() {
         </md-icon>
         <div slot="headline">Revoke Membership?</div>
         <form id="delete-form" slot="content" method="dialog">
-          This will permanently delete the user account and revoke all library privileges. 
-          This action is irreversible.
+          This will permanently delete the user account and revoke all library
+          privileges. This action is irreversible.
         </form>
         <div slot="actions">
           <md-text-button form="delete-form" value="cancel">
@@ -263,12 +401,16 @@ export default function UsersPage() {
       </md-dialog>
 
       {snackbar.open && (
-        <div className="snackbar shadow-3" style={{ borderLeft: '4px solid var(--secondary)' }}>
-          <md-icon style={{ fontSize: "1.2rem", color: 'white' }}>check_circle</md-icon>
+        <div
+          className="snackbar shadow-3"
+          style={{ borderLeft: "4px solid var(--secondary)" }}
+        >
+          <md-icon style={{ fontSize: "1.2rem", color: "white" }}>
+            check_circle
+          </md-icon>
           <span>{snackbar.message}</span>
         </div>
       )}
     </div>
   );
 }
-
