@@ -58,7 +58,7 @@ export default function BooksPage() {
       if (res.data.success) {
         fetchBooks();
         dialogRef.current?.close();
-        showSnackbar("Book has been deleted.");
+        showSnackbar("Book has been deleted");
       }
     } catch (error) {
       console.error("Gagal menghapus buku", error);
@@ -81,8 +81,12 @@ export default function BooksPage() {
             fontSize: "1.1rem",
             fontWeight: "600",
             color: "var(--primary)",
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
           }}
         >
+          <md-icon>add_circle</md-icon>
           Add New Book
         </h3>
         <form onSubmit={handleSubmit} className="form-group">
@@ -109,9 +113,11 @@ export default function BooksPage() {
             required
           />
           <button type="submit" className="btn btn-primary">
+            <md-icon style={{ fontSize: "1.2rem" }}>auto_stories</md-icon>
             <span>Add Book</span>
           </button>
         </form>
+
       </div>
 
       <div className="table-container shadow-2">
@@ -156,7 +162,7 @@ export default function BooksPage() {
                     color: "var(--outline)",
                   }}
                 >
-                  No books available at the moment.
+                  No books available at the moment
                 </td>
               </tr>
             )}
