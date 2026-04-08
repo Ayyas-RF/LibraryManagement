@@ -1,9 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import api from "../services/api";
+import "@material/web/dialog/dialog.js";
+import "@material/web/button/text-button.js";
+import "@material/web/button/filled-button.js";
+import "@material/web/icon/icon.js";
 
 export default function BooksPage() {
   const [books, setBooks] = useState([]);
   const [form, setForm] = useState({ judul: "", penulis: "", tahun: "" });
+  const [deleteId, setDeleteId] = useState(null);
+  const [snackbar, setSnackbar] = useState({ open: false, message: "" });
+  const dialogRef = useRef(null);
+
+  const showSnackbar = (message) => {
+    setSnackbar({ open: true, message });
+    setTimeout(() => setSnackbar({ open: false, message: "" }), 4000);
+  };
 
   const fetchBooks = async () => {
     try {
@@ -27,22 +39,31 @@ export default function BooksPage() {
       if (res.data.success) {
         setForm({ judul: "", penulis: "", tahun: "" });
         fetchBooks();
+        showSnackbar("Book added successfully!");
       }
     } catch (error) {
       console.error("Gagal menambah buku", error);
     }
   };
 
-  const handleDelete = async (id) => {
-    if (window.confirm("Apakah Anda yakin ingin menghapus buku ini?")) {
-      try {
-        const res = await api.delete(`/books/${id}`);
-        if (res.data.success) {
-          fetchBooks();
-        }
-      } catch (error) {
-        console.error("Gagal menghapus buku", error);
+  const handleDelete = (id) => {
+    setDeleteId(id);
+    dialogRef.current?.show();
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!deleteId) return;
+    try {
+      const res = await api.delete(`/books/${deleteId}`);
+      if (res.data.success) {
+        fetchBooks();
+        dialogRef.current?.close();
+        showSnackbar("Book has been deleted.");
       }
+    } catch (error) {
+      console.error("Gagal menghapus buku", error);
+    } finally {
+      setDeleteId(null);
     }
   };
 
@@ -97,18 +118,20 @@ export default function BooksPage() {
         <table className="m3-table">
           <thead>
             <tr>
-              <th style={{ width: "80px" }}>ID</th>
-              <th>Judul</th>
-              <th>Penulis</th>
-              <th style={{ width: "120px" }}>Tahun</th>
-              <th style={{ width: "120px", textAlign: "right" }}>Aksi</th>
+              <th style={{ width: "80px" }}>Id</th>
+              <th style={{ width: "50px" }}>No</th>
+              <th>Title</th>
+              <th>Author</th>
+              <th style={{ width: "120px" }}>Publish Year</th>
+              <th style={{ width: "120px", textAlign: "right" }}>Action</th>
             </tr>
           </thead>
           <tbody>
             {books.length > 0 ? (
-              books.map((b) => (
+              books.map((b, index) => (
                 <tr key={b.id}>
                   <td>#{b.id}</td>
+                  <td>{index + 1}</td>
                   <td style={{ fontWeight: "600" }}>{b.judul}</td>
                   <td>{b.penulis}</td>
                   <td>{b.tahun}</td>
@@ -118,7 +141,7 @@ export default function BooksPage() {
                       className="btn btn-error"
                       style={{ padding: "6px 12px", fontSize: "0.75rem" }}
                     >
-                      Hapus
+                      Delete
                     </button>
                   </td>
                 </tr>
@@ -126,23 +149,49 @@ export default function BooksPage() {
             ) : (
               <tr>
                 <td
-                  colSpan="5"
+                  colSpan="6"
                   style={{
                     textAlign: "center",
                     padding: "3rem",
                     color: "var(--outline)",
                   }}
                 >
-                  <div style={{ fontSize: "1.2rem", marginBottom: "0.5rem" }}>
-                    📭
-                  </div>
-                  Belum ada data buku yang tersedia.
+                  No books available at the moment.
                 </td>
               </tr>
             )}
           </tbody>
         </table>
       </div>
+
+      <md-dialog ref={dialogRef} type="alert">
+        <md-icon slot="icon" style={{ color: "var(--error)" }}>
+          warning
+        </md-icon>
+        <div slot="headline">Delete Book</div>
+        <form id="delete-form" slot="content" method="dialog">
+          Are you sure you want to delete this book? This action cannot be
+          undone.
+        </form>
+        <div slot="actions">
+          <md-text-button form="delete-form" value="cancel">
+            Cancel
+          </md-text-button>
+          <md-filled-button
+            style={{ "--md-filled-button-container-color": "var(--error)" }}
+            onClick={handleConfirmDelete}
+          >
+            Delete
+          </md-filled-button>
+        </div>
+      </md-dialog>
+
+      {snackbar.open && (
+        <div className="snackbar shadow-3">
+          <md-icon style={{ fontSize: "1.2rem" }}>info</md-icon>
+          <span>{snackbar.message}</span>
+        </div>
+      )}
     </div>
   );
 }
