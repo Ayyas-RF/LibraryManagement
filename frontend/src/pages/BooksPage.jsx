@@ -117,7 +117,6 @@ export default function BooksPage() {
             <span>Add Book</span>
           </button>
         </form>
-
       </div>
 
       <div className="table-container shadow-2">
@@ -147,7 +146,7 @@ export default function BooksPage() {
                       className="btn btn-error"
                       style={{ padding: "6px 12px", fontSize: "0.75rem" }}
                     >
-                      Delete
+                      <md-icon style={{ fontSize: '1.2rem' }}>delete</md-icon>
                     </button>
                   </td>
                 </tr>
