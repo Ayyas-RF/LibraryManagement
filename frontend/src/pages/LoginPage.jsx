@@ -46,10 +46,10 @@ export default function LoginPage() {
 
   return (
     <div style={styles.container}>
-      <div style={styles.card}>
+      <div className="stat-card" style={styles.card}>
         <header style={styles.header}>
           <h1 style={styles.title}>Welcome Back</h1>
-          <p style={styles.subtitle}>Login to the Library Management System</p>
+          <p style={styles.subtitle}>Library Management System</p>
         </header>
         <form onSubmit={handleLogin} style={styles.form}>
           <md-outlined-text-field
@@ -61,8 +61,8 @@ export default function LoginPage() {
               !email
                 ? "Please enter your email"
                 : !email.includes("@")
-                  ? "No @"
-                  : "What Domain ?"
+                  ? "Invalid email format"
+                  : "Check your domain"
             }
             onInput={(e) => {
               setEmail(e.target.value);
@@ -89,7 +89,7 @@ export default function LoginPage() {
             disabled={loading || null}
             style={styles.button}
           >
-            {loading ? "Signing in..." : "Login"}
+            {loading ? "Signing in..." : "Login to Dashboard"}
           </md-filled-button>
         </form>
       </div>
@@ -115,22 +115,16 @@ const styles = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    minHeight: "80vh",
+    flex: 1,
     padding: "20px",
   },
   card: {
-    backgroundColor: "var(--bg)",
-    borderRadius: "28px",
-    padding: "40px",
+    padding: "48px",
     width: "100%",
-    maxWidth: "400px",
-    boxShadow: "var(--shadow)",
-    border: "1px solid var(--border)",
-    display: "flex",
-    flexDirection: "column",
-    gap: "24px",
-    transition:
-      "transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease",
+    maxWidth: "440px",
+    gap: "32px",
+    "--accent-color": "var(--primary)",
+    cursor: "default",
   },
   header: {
     textAlign: "center",
@@ -138,18 +132,21 @@ const styles = {
   title: {
     fontSize: "32px",
     margin: "0 0 8px 0",
-    color: "var(--text-h)",
+    color: "var(--on-surface)",
     fontWeight: "700",
+    letterSpacing: "-0.5px",
   },
   subtitle: {
     fontSize: "14px",
-    color: "var(--text)",
-    opacity: 0.9,
+    color: "var(--on-surface-variant)",
+    fontWeight: "500",
+    textTransform: "uppercase",
+    letterSpacing: "1px",
   },
   form: {
     display: "flex",
     flexDirection: "column",
-    gap: "20px",
+    gap: "24px",
   },
   input: {
     width: "100%",
@@ -173,20 +170,11 @@ const styles = {
     "--md-outlined-text-field-error-focus-outline-color": "#ffb4ab",
   },
   button: {
-    marginTop: "8px",
-    "--md-filled-button-container-color": "var(--accent)",
-    "--md-filled-button-label-text-color": "#ffffff",
+    marginTop: "12px",
+    "--md-filled-button-container-color": "var(--primary)",
+    "--md-filled-button-label-text-color": "var(--on-primary)",
     fontWeight: "600",
-  },
-  footer: {
-    textAlign: "center",
-    fontSize: "14px",
-    marginTop: "8px",
-    color: "var(--text)",
-  },
-  link: {
-    color: "var(--accent)",
-    textDecoration: "none",
-    fontWeight: "600",
+    height: "56px",
+    fontSize: "16px",
   },
 };
