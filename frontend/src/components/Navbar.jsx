@@ -15,8 +15,8 @@ export default function Navbar() {
         <nav className="navbar">
             <div className="nav-links">
                 <Link to="/" className={`nav-link ${isActive('/') ? 'active' : ''}`}>Dashboard</Link>
-                <Link to="/books" className={`nav-link ${isActive('/books') ? 'active' : ''}`}>Buku</Link>
-                <Link to="/loans" className={`nav-link ${isActive('/loans') ? 'active' : ''}`}>Peminjaman</Link>
+                <Link to="/books" className={`nav-link ${isActive('/books') ? 'active' : ''}`}>Books</Link>
+                <Link to="/loans" className={`nav-link ${isActive('/loans') ? 'active' : ''}`}>Loans</Link>
                 <Link to="/users" className={`nav-link ${isActive('/users') ? 'active' : ''}`}>Users</Link>
             </div>
             <button className="logout-btn" onClick={handleLogout}>Logout</button>
