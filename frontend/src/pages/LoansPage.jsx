@@ -61,6 +61,7 @@ export default function LoansPage() {
       fetchData();
       showSnackbar("Book has been returned.");
     } catch (error) {
+      console.error(error);
       showSnackbar("Failed to update loan status.");
     }
   };
